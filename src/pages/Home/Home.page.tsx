@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Assets } from '../../assets/Assets';
+import { Container } from '../../atomic/atoms/Container/Container.atom';
+import { Title } from '../../atomic/atoms/Title/Title.atom';
 import {
   RootStackParamList,
   ScreensName,
@@ -71,30 +73,32 @@ const Home = ({ navigation }: IHomeScrenProps) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
-      <View style={styles.header}>
-        <Image source={Assets.logo.header} style={styles.imageHeader} />
-      </View>
-      <View style={styles.body}>
-        <FlatList
-          data={DATA}
-          renderItem={({ item }: { item: IPeople }) => (
-            <Pressable onPress={goToDetailsPeople} style={styles.item}>
-              <Image
-                source={{ uri: 'https://picsum.photos/200/200' }}
-                style={styles.imageAvatar}
-              />
-              <View>
-                <Text style={styles.textItem}>{item.name}</Text>
-                <Text style={styles.textItem}>{item.birth_year}</Text>
-              </View>
-            </Pressable>
-          )}
-          keyExtractor={item => item.name}
-        />
-      </View>
-    </SafeAreaView>
+    <Container>
+      <SafeAreaView>
+        <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
+        <View style={styles.header}>
+          <Image source={Assets.logo.header} style={styles.imageHeader} />
+        </View>
+        <View style={styles.body}>
+          <FlatList
+            data={DATA}
+            renderItem={({ item }: { item: IPeople }) => (
+              <Pressable onPress={goToDetailsPeople} style={styles.item}>
+                <Image
+                  source={{ uri: 'https://picsum.photos/200/200' }}
+                  style={styles.imageAvatar}
+                />
+                <View style={styles.containerText}>
+                  <Title text={item.name} size="medium" />
+                  <Text style={styles.textItem}>{item.birth_year}</Text>
+                </View>
+              </Pressable>
+            )}
+            keyExtractor={item => item.name}
+          />
+        </View>
+      </SafeAreaView>
+    </Container>
   );
 };
 

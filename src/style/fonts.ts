@@ -1,7 +1,5 @@
 const font = {
-  MontserratLight: 'Montserrat-Light',
-  MontserratRegular: 'Montserrat-Regular',
-  MontserratSemiBold: 'Montserrat-SemiBold',
+  StarJedi: 'StarJedi',
 };
 
 const fontSizes = {

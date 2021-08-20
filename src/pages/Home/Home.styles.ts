@@ -27,9 +27,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: metrics.spaces.space16,
   },
+  containerText: {
+    marginLeft: metrics.spaces.space16,
+  },
   textItem: {
     color: colors.white,
-    paddingLeft: metrics.spaces.space16,
   },
 });
 
