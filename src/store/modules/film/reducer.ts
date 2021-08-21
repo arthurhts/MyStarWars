@@ -1,31 +1,29 @@
 import produce from 'immer';
 import { Reducer } from 'redux';
-import { IPeopleState, ActionTypesPeople } from './types';
+import { IFilmState, ActionTypesFilm } from './types';
 
-const INITIAL_STATE: IPeopleState = {
-  pagination: null,
+const INITIAL_STATE: IFilmState = {
   data: null,
   loading: false,
   error: false,
 };
 
-const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
+const film: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case ActionTypesPeople.LOAD_SUCCESS: {
+      case ActionTypesFilm.LOAD_SUCCESS: {
         draft.loading = false;
         draft.error = false;
 
         break;
       }
-      case ActionTypesPeople.LOAD_REQUEST: {
+      case ActionTypesFilm.LOAD_REQUEST: {
         draft.loading = false;
         draft.error = false;
         draft.data = action.payload.data;
-        draft.pagination = action.payload.pagination;
         break;
       }
-      case ActionTypesPeople.LOAD_FAILURE: {
+      case ActionTypesFilm.LOAD_FAILURE: {
         draft.loading = false;
         draft.error = true;
 
@@ -38,4 +36,4 @@ const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
   });
 };
 
-export default people;
+export default film;

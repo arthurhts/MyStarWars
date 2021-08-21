@@ -1,5 +1,5 @@
-import {action} from 'typesafe-actions';
-import {ActionTypesPeople, IPeople} from './types';
+import { action } from 'typesafe-actions';
+import { ActionTypesPeople, IPeople } from './types';
 
 export const loadPeopleRequest = () => action(ActionTypesPeople.LOAD_REQUEST);
 

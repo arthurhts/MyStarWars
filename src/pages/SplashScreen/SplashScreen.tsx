@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, StatusBar, View } from 'react-native';
@@ -17,11 +18,13 @@ interface ISplashScrenProps {
 }
 
 const SplashScreen = ({ navigation }: ISplashScrenProps) => {
-  React.useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate(ScreensName.HomePage);
-    }, 3000);
-  }, [navigation]);
+  useFocusEffect(
+    React.useCallback(() => {
+      setTimeout(() => {
+        navigation.navigate(ScreensName.HomePage);
+      }, 3000);
+    }, [navigation]),
+  );
 
   return (
     <View style={styles.container}>
