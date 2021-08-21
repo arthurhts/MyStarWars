@@ -1,13 +1,6 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  SafeAreaView,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
+import { Image, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Assets } from '../../assets/Assets';
 import { Container } from '../../atomic/atoms/Container/Container.atom';
@@ -17,7 +10,6 @@ import {
   ScreensName,
 } from '../../navigation/RootNavigator';
 import { IPeople } from '../../store/modules/people/types';
-import { colors } from '../../style';
 
 import styles from './Home.styles';
 
@@ -75,7 +67,6 @@ const Home = ({ navigation }: IHomeScrenProps) => {
   return (
     <Container>
       <SafeAreaView>
-        <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
         <View style={styles.header}>
           <Image source={Assets.logo.header} style={styles.imageHeader} />
         </View>

@@ -1,13 +1,13 @@
 import React from 'react';
-import { FlatList, Image, StatusBar, View } from 'react-native';
+import { FlatList, Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Title } from '../../atomic/atoms/Title/Title.atom';
 import { PeopleTrait } from '../../atomic/molecules/PeopleTrait/PeopleTrait.molecule';
-import { IFilms } from '../../store/modules/films/types';
-import { colors, metrics } from '../../style';
+import { IFilm } from '../../store/modules/film/types';
+import { metrics } from '../../style';
 import styles from './PeopleDetails.styles';
 
-const DATA: IFilms[] = [
+const DATA: IFilm[] = [
   {
     episode_id: '1',
     title: 'Luke Skywalker 1',
@@ -34,7 +34,6 @@ const PeopleDetails = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
         <Image
           source={{ uri: 'https://picsum.photos/1280/820' }}
           style={styles.imageAvatar}
@@ -81,7 +80,7 @@ const PeopleDetails = () => {
           <FlatList
             data={DATA}
             horizontal={true}
-            renderItem={({ item }: { item: IFilms }) => (
+            renderItem={({ item }: { item: IFilm }) => (
               <View style={styles.item}>
                 <Image
                   source={{ uri: 'https://picsum.photos/100/200' }}

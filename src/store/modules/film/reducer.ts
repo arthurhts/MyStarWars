@@ -14,7 +14,6 @@ const film: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
       case ActionTypesFilm.LOAD_SUCCESS: {
         draft.loading = false;
         draft.error = false;
-
         break;
       }
       case ActionTypesFilm.LOAD_REQUEST: {
@@ -26,7 +25,6 @@ const film: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
       case ActionTypesFilm.LOAD_FAILURE: {
         draft.loading = false;
         draft.error = true;
-
         break;
       }
       default: {

@@ -9,8 +9,8 @@ import { IPeopleState } from './modules/people/types';
 import { IFilmState } from './modules/film/types';
 
 export interface IState {
-  people: IPeopleState;
-  film: IFilmState;
+  peoples: IPeopleState;
+  films: IFilmState;
 }
 
 const sagaMiddleware = createSagaMiddleware();

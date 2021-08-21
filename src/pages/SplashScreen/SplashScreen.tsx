@@ -1,13 +1,12 @@
 import { useFocusEffect } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { Image, StatusBar, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Assets } from '../../assets/Assets';
 import {
   RootStackParamList,
   ScreensName,
 } from '../../navigation/RootNavigator';
-import { colors } from '../../style';
 import styles from './SplashScreen.styles';
 
 interface ISplashScrenProps {
@@ -28,7 +27,6 @@ const SplashScreen = ({ navigation }: ISplashScrenProps) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
       <Image source={Assets.logo.splash} />
     </View>
   );
