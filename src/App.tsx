@@ -12,11 +12,12 @@ import { persistor, store } from './store';
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}></PersistGate>
-      <NavigationContainer>
-        <StatusBar barStyle="light-content" />
-        <RootNavigator />
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <StatusBar barStyle="light-content" />
+          <RootNavigator />
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };
