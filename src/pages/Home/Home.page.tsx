@@ -1,68 +1,63 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, Pressable, SafeAreaView, Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Assets } from '../../assets/Assets';
 import { Container } from '../../atomic/atoms/Container/Container.atom';
 import { Title } from '../../atomic/atoms/Title/Title.atom';
-import {
-  RootStackParamList,
-  ScreensName,
-} from '../../navigation/RootNavigator';
+import { RootScreenNavigation } from '../../navigation/RootNavigator';
+import { ScreensName } from '../../navigation/ScreenName';
+import { IState } from '../../store';
+import { loadPeopleRequest } from '../../store/modules/people/actions';
 import { IPeople } from '../../store/modules/people/types';
-
 import styles from './Home.styles';
 
-const DATA: IPeople[] = [
-  {
-    name: 'Luke Skywalker 1',
-    gender: 'male',
-    eye_color: 'Blue',
-    birth_year: '19BBY',
-  },
-  {
-    name: 'Luke Skywalker 2',
-    gender: 'male',
-    eye_color: 'Blue',
-    birth_year: '19BBY',
-  },
-  {
-    name: 'Luke Skywalker 3',
-    gender: 'male',
-    eye_color: 'Blue',
-    birth_year: '19BBY',
-  },
-  {
-    name: 'Luke Skywalker 4',
-    gender: 'male',
-    eye_color: 'Blue',
-    birth_year: '19BBY',
-  },
-  {
-    name: 'Luke Skywalker 5',
-    gender: 'male',
-    eye_color: 'Blue',
-    birth_year: '19BBY',
-  },
-  {
-    name: 'Luke Skywalker 6',
-    gender: 'male',
-    eye_color: 'Blue',
-    birth_year: '19BBY',
-  },
-];
+const Home = () => {
+  const dispatch = useDispatch();
 
-interface IHomeScrenProps {
-  navigation: NativeStackNavigationProp<
-    RootStackParamList,
-    ScreensName.SplashScreenPage
-  >;
-}
+  const { navigate } =
+    useNavigation<RootScreenNavigation<ScreensName.DetailsPage>>();
 
-const Home = ({ navigation }: IHomeScrenProps) => {
-  const goToDetailsPeople = React.useCallback(() => {
-    navigation.navigate(ScreensName.DetailsPage, { id: '1' });
-  }, [navigation]);
+  const peoples = useSelector<IState, IPeople[] | null>(
+    state => state.peoples.data,
+  );
+  const isLoading = useSelector<IState, boolean>(
+    state => state.peoples.loading,
+  );
+
+  React.useEffect(() => {
+    dispatch(loadPeopleRequest());
+  }, [dispatch]);
+
+  const goToDetailsPeople = React.useCallback(
+    people => {
+      navigate(ScreensName.DetailsPage, { people });
+    },
+    [navigate],
+  );
+
+  const loadNextPage = React.useCallback(() => {
+    console.log('carregar');
+    dispatch(loadPeopleRequest());
+  }, [dispatch]);
+
+  const renderFooter = () => {
+    if (isLoading) return null;
+
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  };
 
   return (
     <Container>
@@ -71,10 +66,18 @@ const Home = ({ navigation }: IHomeScrenProps) => {
           <Image source={Assets.logo.header} style={styles.imageHeader} />
         </View>
         <View style={styles.body}>
+          {isLoading && <Text>Carregando</Text>}
           <FlatList
-            data={DATA}
+            data={peoples}
+            style={{ flexGrow: 1 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            onEndReached={loadNextPage}
+            onEndReachedThreshold={0.1}
+            ListFooterComponent={renderFooter}
             renderItem={({ item }: { item: IPeople }) => (
-              <Pressable onPress={goToDetailsPeople} style={styles.item}>
+              <Pressable
+                onPress={() => goToDetailsPeople(item)}
+                style={styles.item}>
                 <Image
                   source={{ uri: 'https://picsum.photos/200/200' }}
                   style={styles.imageAvatar}

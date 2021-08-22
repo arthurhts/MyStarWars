@@ -4,7 +4,7 @@ import { IPeopleState, ActionTypesPeople } from './types';
 
 const INITIAL_STATE: IPeopleState = {
   pagination: null,
-  data: null,
+  data: [],
   loading: false,
   error: false,
 };
@@ -15,20 +15,25 @@ const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
       case ActionTypesPeople.LOAD_SUCCESS: {
         draft.loading = false;
         draft.error = false;
-
+        draft.data = [...state.data, ...action.payload.results];
+        draft.pagination = action.payload;
         break;
       }
       case ActionTypesPeople.LOAD_REQUEST: {
-        draft.loading = false;
+        draft.loading = true;
         draft.error = false;
-        draft.data = action.payload.data;
-        draft.pagination = action.payload.pagination;
         break;
       }
       case ActionTypesPeople.LOAD_FAILURE: {
         draft.loading = false;
         draft.error = true;
-
+        break;
+      }
+      case ActionTypesPeople.RESET: {
+        draft.pagination = null;
+        draft.data = [];
+        draft.loading = false;
+        draft.error = false;
         break;
       }
       default: {

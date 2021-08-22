@@ -1,22 +1,32 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RouteProp } from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Home } from '../pages/Home/Home.page';
 import { PeopleDetails } from '../pages/PeopleDetails/PeopleDetails.page';
 import { SplashScreen } from '../pages/SplashScreen/SplashScreen';
-
-export enum ScreensName {
-  HomePage = 'HomePage',
-  SplashScreenPage = 'SplashScreenPage',
-  DetailsPage = 'DetailsPage',
-}
+import { IPeople } from '../store/modules/people/types';
+import { ScreensName } from './ScreenName';
 
 export type RootStackParamList = {
   HomePage: undefined;
   SplashScreenPage: undefined;
   DetailsPage: {
-    id: string;
+    people: IPeople;
   };
 };
+
+export type RootScreenNavigation<RouteName extends keyof RootStackParamList> =
+  NativeStackNavigationProp<RootStackParamList, RouteName>;
+
+export type RootScreenRoute<RouteName extends keyof RootStackParamList> =
+  RouteProp<RootStackParamList, RouteName>;
+
+export type RootScreenProps<RouteName extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, RouteName>;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

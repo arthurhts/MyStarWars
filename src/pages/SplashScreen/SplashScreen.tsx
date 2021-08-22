@@ -3,10 +3,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, View } from 'react-native';
 import { Assets } from '../../assets/Assets';
-import {
-  RootStackParamList,
-  ScreensName,
-} from '../../navigation/RootNavigator';
+import { RootStackParamList } from '../../navigation/RootNavigator';
+import { ScreensName } from '../../navigation/ScreenName';
 import styles from './SplashScreen.styles';
 
 interface ISplashScrenProps {

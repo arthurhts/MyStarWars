@@ -1,9 +1,29 @@
-import { action } from 'typesafe-actions';
 import { ActionTypesFilm, IFilm } from './types';
 
-export const loadFilmRequest = () => action(ActionTypesFilm.LOAD_REQUEST);
+export function loadFilmRequest(links: string[]) {
+  return {
+    type: ActionTypesFilm.LOAD_REQUEST,
+    payload: {
+      links,
+    },
+  };
+}
 
-export const loadFilmSuccess = (data: IFilm) =>
-  action(ActionTypesFilm.LOAD_SUCCESS, data);
+export function loadFilmSuccess(films: IFilm[]) {
+  return {
+    type: ActionTypesFilm.LOAD_SUCCESS,
+    payload: films,
+  };
+}
 
-export const loadFilmFailure = () => action(ActionTypesFilm.LOAD_FAILURE);
+export function loadFilmFailure() {
+  return {
+    type: ActionTypesFilm.LOAD_FAILURE,
+  };
+}
+
+export function resetFilm() {
+  return {
+    type: ActionTypesFilm.RESET,
+  };
+}

@@ -1,9 +1,26 @@
-import { action } from 'typesafe-actions';
-import { ActionTypesPeople, IPeople } from './types';
+import { ActionTypesPeople, IPeopleResponse } from './types';
 
-export const loadPeopleRequest = () => action(ActionTypesPeople.LOAD_REQUEST);
+export function loadPeopleRequest() {
+  return {
+    type: ActionTypesPeople.LOAD_REQUEST,
+  };
+}
 
-export const loadPeopleSuccess = (data: IPeople) =>
-  action(ActionTypesPeople.LOAD_SUCCESS, data);
+export function loadPeopleSuccess(data: IPeopleResponse) {
+  return {
+    type: ActionTypesPeople.LOAD_SUCCESS,
+    payload: data,
+  };
+}
 
-export const loadPeopleFailure = () => action(ActionTypesPeople.LOAD_FAILURE);
+export function loadPeopleFailure() {
+  return {
+    type: ActionTypesPeople.LOAD_FAILURE,
+  };
+}
+
+export function resetPeople() {
+  return {
+    type: ActionTypesPeople.RESET,
+  };
+}

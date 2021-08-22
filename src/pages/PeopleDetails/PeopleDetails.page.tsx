@@ -1,38 +1,51 @@
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import React from 'react';
-import { FlatList, Image, View } from 'react-native';
+import { FlatList, Image, Pressable, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
 import { Title } from '../../atomic/atoms/Title/Title.atom';
 import { PeopleTrait } from '../../atomic/molecules/PeopleTrait/PeopleTrait.molecule';
+import {
+  RootScreenNavigation,
+  RootScreenRoute,
+} from '../../navigation/RootNavigator';
+import { ScreensName } from '../../navigation/ScreenName';
+import { IState } from '../../store';
+import { loadFilmRequest, resetFilm } from '../../store/modules/film/actions';
 import { IFilm } from '../../store/modules/film/types';
 import { metrics } from '../../style';
 import styles from './PeopleDetails.styles';
 
-const DATA: IFilm[] = [
-  {
-    episode_id: '1',
-    title: 'Luke Skywalker 1',
-  },
-  {
-    episode_id: '2',
-    title: 'Luke Skywalker 1',
-  },
-  {
-    episode_id: '3',
-    title: 'Luke Skywalker 1',
-  },
-  {
-    episode_id: '4',
-    title: 'Luke Skywalker 1',
-  },
-  {
-    episode_id: '5',
-    title: 'Luke Skywalker 1',
-  },
-];
-
 const PeopleDetails = () => {
+  const dispatch = useDispatch();
+  const films = useSelector<IState, IFilm[] | null>(state => state.films.data);
+
+  const { params } = useRoute<RootScreenRoute<ScreensName.DetailsPage>>();
+
+  const { navigate } =
+    useNavigation<RootScreenNavigation<ScreensName.DetailsPage>>();
+
+  const goBack = React.useCallback(() => {
+    navigate(ScreensName.HomePage);
+  }, [navigate]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(resetFilm());
+      console.log(params.people.films);
+      dispatch(loadFilmRequest(params.people.films));
+    }, [dispatch, params.people]),
+  );
+
   return (
     <View style={styles.container}>
+      <Pressable onPress={goBack}>
+        <Text>VOLTAR</Text>
+      </Pressable>
       <ScrollView>
         <Image
           source={{ uri: 'https://picsum.photos/1280/820' }}
@@ -41,30 +54,32 @@ const PeopleDetails = () => {
         <View style={styles.content}>
           <View style={styles.contentPeopleName}>
             <Title text="Star Wars" size="medium" />
-            <Title text="Nome do personagem" size="big" />
+            <Title text={params.people?.name} size="big" />
           </View>
           <View style={styles.contentPeopleTrait}>
             <View style={styles.row}>
               <PeopleTrait
                 textTitle="Ano Aniversário"
-                textValue="19 BBY"
+                textValue={params.people?.birth_year}
                 styleContainer={{ marginRight: metrics.spaces.space32 }}
               />
               <PeopleTrait
                 textTitle="Genero"
-                textValue="Male"
+                textValue={
+                  params.people?.gender === 'Male' ? 'Masculino' : 'Feminino'
+                }
                 styleContainer={{ marginRight: metrics.spaces.space32 }}
               />
             </View>
             <View style={styles.row}>
               <PeopleTrait
                 textTitle="Cor dos olhos"
-                textValue="Blue"
+                textValue={params.people?.eye_color}
                 styleContainer={{ marginRight: metrics.spaces.space32 }}
               />
               <PeopleTrait
                 textTitle="Peso"
-                textValue="200"
+                textValue={params.people?.mass}
                 styleContainer={{ marginRight: metrics.spaces.space32 }}
               />
             </View>
@@ -78,7 +93,7 @@ const PeopleDetails = () => {
             }}
           />
           <FlatList
-            data={DATA}
+            data={films}
             horizontal={true}
             renderItem={({ item }: { item: IFilm }) => (
               <View style={styles.item}>
