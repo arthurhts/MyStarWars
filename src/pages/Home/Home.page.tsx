@@ -16,8 +16,8 @@ import { Title } from '../../atomic/atoms/Title/Title.atom';
 import { RootScreenNavigation } from '../../navigation/RootNavigator';
 import { ScreensName } from '../../navigation/ScreenName';
 import { IState } from '../../store';
-import { loadPeopleRequest } from '../../store/modules/people/actions';
-import { IPeople } from '../../store/modules/people/types';
+import { loadPeopleRequest } from '../../store/modules/peoples/actions';
+import { IPeople } from '../../store/modules/peoples/types';
 import { colors } from '../../style';
 import styles from './Home.styles';
 

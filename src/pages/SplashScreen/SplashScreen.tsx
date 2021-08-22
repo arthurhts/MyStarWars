@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { Assets } from '../../assets/Assets';
 import { RootStackParamList } from '../../navigation/RootNavigator';
 import { ScreensName } from '../../navigation/ScreenName';
-import { resetPeople } from '../../store/modules/people/actions';
+import { resetPeople } from '../../store/modules/peoples/actions';
 import styles from './SplashScreen.styles';
 
 interface ISplashScrenProps {

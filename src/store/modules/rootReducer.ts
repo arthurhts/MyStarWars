@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
-import peoples from './people/reducer';
-import films from './film/reducer';
+import { peoples } from './peoples/reducer';
+import { films } from './films/reducer';
+import { peoplesFavorites } from './peoplesFavorites/reducer';
+
 export default combineReducers({
   peoples,
   films,
+  peoplesFavorites,
 });

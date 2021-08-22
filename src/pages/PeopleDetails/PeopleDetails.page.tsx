@@ -15,8 +15,8 @@ import {
 } from '../../navigation/RootNavigator';
 import { ScreensName } from '../../navigation/ScreenName';
 import { IState } from '../../store';
-import { loadFilmRequest, resetFilm } from '../../store/modules/film/actions';
-import { IFilm } from '../../store/modules/film/types';
+import { loadFilmRequest, resetFilm } from '../../store/modules/films/actions';
+import { IFilm } from '../../store/modules/films/types';
 import { metrics } from '../../style';
 import styles from './PeopleDetails.styles';
 

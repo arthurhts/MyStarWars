@@ -8,7 +8,7 @@ import * as React from 'react';
 import { Home } from '../pages/Home/Home.page';
 import { PeopleDetails } from '../pages/PeopleDetails/PeopleDetails.page';
 import { SplashScreen } from '../pages/SplashScreen/SplashScreen';
-import { IPeople } from '../store/modules/people/types';
+import { IPeople } from '../store/modules/peoples/types';
 import { ScreensName } from './ScreenName';
 
 export type RootStackParamList = {
