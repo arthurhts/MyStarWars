@@ -18,6 +18,7 @@ import { ScreensName } from '../../navigation/ScreenName';
 import { IState } from '../../store';
 import { loadPeopleRequest } from '../../store/modules/people/actions';
 import { IPeople } from '../../store/modules/people/types';
+import { colors } from '../../style';
 import styles from './Home.styles';
 
 const Home = () => {
@@ -33,8 +34,16 @@ const Home = () => {
     state => state.peoples.loading,
   );
 
+  const totalPeoples = useSelector<IState, number>(
+    state => state.peoples.total,
+  );
+
+  const totalLoadedPeoples = useSelector<IState, number>(
+    state => state.peoples.totalLoaded,
+  );
+
   React.useEffect(() => {
-    dispatch(loadPeopleRequest());
+    dispatch(loadPeopleRequest(true));
   }, [dispatch]);
 
   const goToDetailsPeople = React.useCallback(
@@ -45,16 +54,22 @@ const Home = () => {
   );
 
   const loadNextPage = React.useCallback(() => {
-    console.log('carregar');
-    dispatch(loadPeopleRequest());
+    dispatch(loadPeopleRequest(false));
   }, [dispatch]);
 
+  const shouldNextPage = React.useMemo(
+    () => !isLoading && totalLoadedPeoples < totalPeoples,
+    [isLoading, totalLoadedPeoples, totalPeoples],
+  );
+
   const renderFooter = () => {
-    if (isLoading) return null;
+    if (!isLoading) {
+      return null;
+    }
 
     return (
       <View>
-        <ActivityIndicator />
+        <ActivityIndicator size="large" color={colors.white} />
       </View>
     );
   };
@@ -66,12 +81,10 @@ const Home = () => {
           <Image source={Assets.logo.header} style={styles.imageHeader} />
         </View>
         <View style={styles.body}>
-          {isLoading && <Text>Carregando</Text>}
           <FlatList
             data={peoples}
-            style={{ flexGrow: 1 }}
-            contentContainerStyle={{ flexGrow: 1 }}
-            onEndReached={loadNextPage}
+            contentContainerStyle={styles.contentFlatList}
+            onEndReached={() => shouldNextPage && loadNextPage()}
             onEndReachedThreshold={0.1}
             ListFooterComponent={renderFooter}
             renderItem={({ item }: { item: IPeople }) => (

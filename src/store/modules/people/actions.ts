@@ -1,8 +1,9 @@
 import { ActionTypesPeople, IPeopleResponse } from './types';
 
-export function loadPeopleRequest() {
+export function loadPeopleRequest(firstPage: boolean) {
   return {
     type: ActionTypesPeople.LOAD_REQUEST,
+    payload: { firstPage },
   };
 }
 
@@ -16,6 +17,12 @@ export function loadPeopleSuccess(data: IPeopleResponse) {
 export function loadPeopleFailure() {
   return {
     type: ActionTypesPeople.LOAD_FAILURE,
+  };
+}
+
+export function nextPage() {
+  return {
+    type: ActionTypesPeople.SET_NEXT_PAGE,
   };
 }
 

@@ -3,6 +3,7 @@ export enum ActionTypesPeople {
   LOAD_REQUEST = '@people/LOAD_REQUEST',
   LOAD_SUCCESS = '@people/LOAD_SUCCESS',
   LOAD_FAILURE = '@people/LOAD_FAILURE',
+  SET_NEXT_PAGE = '@people/SET_NEXT_PAGE',
   RESET = '@people/RESET',
 }
 
@@ -16,23 +17,19 @@ export interface IPeople {
   films: string[];
 }
 
-export interface IPagination {
-  count: number;
-  next: string;
-  previous: string;
-}
-
 export interface IPeopleResponse {
   count: number;
   next: string;
   previous: string;
-  result: IPeople[];
+  results: IPeople[];
 }
 
 //STATE TYPE
 export interface IPeopleState {
-  readonly pagination: IPagination | null;
   readonly data: IPeople[];
+  readonly total: number;
+  readonly totalLoaded: number;
+  readonly nextPage: number;
   readonly loading: boolean;
   readonly error: boolean;
 }

@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
   textItem: {
     color: colors.white,
   },
+  contentFlatList: {
+    flexGrow: 1,
+    paddingBottom: 280,
+  },
 });
 
 export default styles;

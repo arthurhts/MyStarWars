@@ -3,8 +3,10 @@ import { Reducer } from 'redux';
 import { IPeopleState, ActionTypesPeople } from './types';
 
 const INITIAL_STATE: IPeopleState = {
-  pagination: null,
   data: [],
+  total: 0,
+  totalLoaded: 0,
+  nextPage: 1,
   loading: false,
   error: false,
 };
@@ -16,7 +18,9 @@ const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
         draft.loading = false;
         draft.error = false;
         draft.data = [...state.data, ...action.payload.results];
-        draft.pagination = action.payload;
+        draft.total = action.payload.count;
+        draft.totalLoaded = state.totalLoaded + action.payload.results.length;
+        draft.nextPage++;
         break;
       }
       case ActionTypesPeople.LOAD_REQUEST: {
@@ -30,8 +34,10 @@ const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
         break;
       }
       case ActionTypesPeople.RESET: {
-        draft.pagination = null;
         draft.data = [];
+        draft.total = 0;
+        draft.totalLoaded = 0;
+        draft.nextPage = 1;
         draft.loading = false;
         draft.error = false;
         break;
