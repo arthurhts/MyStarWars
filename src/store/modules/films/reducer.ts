@@ -8,7 +8,7 @@ const INITIAL_STATE: IFilmState = {
   error: false,
 };
 
-const film: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
+const films: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case ActionTypesFilm.LOAD_SUCCESS: {
@@ -41,4 +41,4 @@ const film: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
   });
 };
 
-export default film;
+export { films };

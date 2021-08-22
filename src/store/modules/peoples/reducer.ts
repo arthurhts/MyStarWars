@@ -11,7 +11,7 @@ const INITIAL_STATE: IPeopleState = {
   error: false,
 };
 
-const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
+const peoples: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case ActionTypesPeople.LOAD_SUCCESS: {
@@ -49,4 +49,4 @@ const people: Reducer<IPeopleState> = (state = INITIAL_STATE, action) => {
   });
 };
 
-export default people;
+export { peoples };
