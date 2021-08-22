@@ -7,21 +7,29 @@ import rootSaga from './modules/rootSaga';
 
 import { IPeopleState } from './modules/people/types';
 import { IFilmState } from './modules/film/types';
+import { persistReducer, persistStore } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export interface IState {
   peoples: IPeopleState;
   films: IFilmState;
 }
 
-const sagaMiddleware = createSagaMiddleware();
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
 
+const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store: Store<IState> = createStore(
-  rootReducer,
+  persistedReducer,
   composeWithDevTools(applyMiddleware(...middlewares)),
 );
 
+const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);
 
-export default store;
+export { store, persistor, sagaMiddleware };

@@ -4,13 +4,15 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { RootNavigator } from './navigation/RootNavigator';
-import store from './store';
+import { persistor, store } from './store';
 
 const App = () => {
   return (
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}></PersistGate>
       <NavigationContainer>
         <StatusBar barStyle="light-content" />
         <RootNavigator />
