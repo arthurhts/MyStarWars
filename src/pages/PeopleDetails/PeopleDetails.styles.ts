@@ -6,7 +6,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.primary,
   },
-  header: {},
+  header: {
+    marginTop: metrics.spaces.space32,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   imageAvatar: {
     width: '100%',
     height: Dimensions.get('screen').height / 3,
@@ -14,9 +19,6 @@ const styles = StyleSheet.create({
   body: {},
   content: {
     marginHorizontal: metrics.spaces.space16,
-  },
-  contentPeopleName: {
-    marginTop: metrics.spaces.space32,
   },
   contentPeopleTrait: {
     marginTop: metrics.spaces.space16,
@@ -34,6 +36,21 @@ const styles = StyleSheet.create({
     height: 260,
     marginBottom: metrics.spaces.space8,
     borderRadius: metrics.radius,
+  },
+  btnBack: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 10,
+    borderRadius: 40,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  },
+  loadingContainer: {
+    flex: 1,
   },
 });
 

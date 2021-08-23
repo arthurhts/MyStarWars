@@ -4,25 +4,38 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import React from 'react';
-import { FlatList, Image, Pressable, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Pressable,
+  View,
+} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { Title } from '../../atomic/atoms/Title/Title.atom';
-import { PeopleTrait } from '../../atomic/molecules/PeopleTrait/PeopleTrait.molecule';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {
   RootScreenNavigation,
   RootScreenRoute,
 } from '../../navigation/RootNavigator';
+
 import { ScreensName } from '../../navigation/ScreenName';
 import { IState } from '../../store';
 import { loadFilmRequest, resetFilm } from '../../store/modules/films/actions';
 import { IFilm } from '../../store/modules/films/types';
-import { metrics } from '../../style';
+import { Title } from '../../atomic/atoms/Title/Title.atom';
+import { PeopleTrait } from '../../atomic/molecules/PeopleTrait/PeopleTrait.molecule';
+import { colors, metrics } from '../../style';
 import styles from './PeopleDetails.styles';
+import { Favorites } from '../../atomic/molecules/Favorites/Favorites.molecule';
 
 const PeopleDetails = () => {
   const dispatch = useDispatch();
+
   const films = useSelector<IState, IFilm[] | null>(state => state.films.data);
+  const isLoadingFilms = useSelector<IState, boolean>(
+    state => state.films.loading,
+  );
 
   const { params } = useRoute<RootScreenRoute<ScreensName.DetailsPage>>();
 
@@ -43,18 +56,21 @@ const PeopleDetails = () => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={goBack}>
-        <Text>VOLTAR</Text>
-      </Pressable>
       <ScrollView>
+        <Pressable onPress={goBack} style={styles.btnBack}>
+          <Icon name="arrowleft" size={30} color={colors.primary} />
+        </Pressable>
         <Image
           source={{ uri: 'https://picsum.photos/1280/820' }}
           style={styles.imageAvatar}
         />
         <View style={styles.content}>
-          <View style={styles.contentPeopleName}>
-            <Title text="Star Wars" size="medium" />
-            <Title text={params.people?.name} size="big" />
+          <View style={styles.header}>
+            <View>
+              <Title text="Star Wars" size="medium" />
+              <Title text={params.people?.name} size="big" />
+            </View>
+            <Favorites namePeople={params.people?.name} />
           </View>
           <View style={styles.contentPeopleTrait}>
             <View style={styles.row}>
@@ -92,20 +108,26 @@ const PeopleDetails = () => {
               marginBottom: metrics.spaces.space16,
             }}
           />
-          <FlatList
-            data={films}
-            horizontal={true}
-            renderItem={({ item }: { item: IFilm }) => (
-              <View style={styles.item}>
-                <Image
-                  source={{ uri: 'https://picsum.photos/100/200' }}
-                  style={styles.imageFilm}
-                />
-                <Title text={item.title} size="small" />
-              </View>
-            )}
-            keyExtractor={item => item.episode_id}
-          />
+          {isLoadingFilms ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color={colors.white} />
+            </View>
+          ) : (
+            <FlatList
+              data={films}
+              horizontal={true}
+              renderItem={({ item }: { item: IFilm }) => (
+                <View style={styles.item}>
+                  <Image
+                    source={{ uri: 'https://picsum.photos/100/200' }}
+                    style={styles.imageFilm}
+                  />
+                  <Title text={item.title} size="small" />
+                </View>
+              )}
+              keyExtractor={item => item.episode_id}
+            />
+          )}
         </View>
       </ScrollView>
     </View>

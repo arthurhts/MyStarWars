@@ -1,15 +1,13 @@
 import { ActionTypesPeopleFavorites } from './types';
 
-export function loadFilmRequest(namePeople: string) {
+export function addPeopleFavorites(namePeople: string) {
   return {
     type: ActionTypesPeopleFavorites.ADD_FAVORITES,
-    payload: {
-      namePeople,
-    },
+    payload: namePeople,
   };
 }
 
-export function loadFilmSuccess(namePeople: string) {
+export function removePeopleFavorites(namePeople: string) {
   return {
     type: ActionTypesPeopleFavorites.REMOVE_FAVORITES,
     payload: namePeople,

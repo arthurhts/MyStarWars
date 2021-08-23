@@ -9,9 +9,18 @@ const spaces = {
   space64: 64,
 };
 
+const elevation = {
+  elevation1: 1,
+  elevation2: 2,
+  elevation3: 3,
+  elevation4: 4,
+  elevation5: 5,
+};
+
 const metrics = {
-  spaces: spaces,
+  spaces,
   radius: 5,
+  elevation,
 };
 
 export default metrics;
