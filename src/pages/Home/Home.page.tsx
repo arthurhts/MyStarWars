@@ -94,6 +94,7 @@ const Home = () => {
             contentContainerStyle={styles.contentFlatList}
             onEndReached={() => shouldNextPage && loadNextPage()}
             onEndReachedThreshold={0.1}
+            progressViewOffset={-180}
             refreshing={isLoading}
             onRefresh={handleRefresh}
             ListFooterComponent={renderFooter}

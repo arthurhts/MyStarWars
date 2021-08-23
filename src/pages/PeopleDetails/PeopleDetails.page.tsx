@@ -118,7 +118,7 @@ const PeopleDetails = () => {
               renderItem={({ item }: { item: IFilm }) => (
                 <View style={styles.item}>
                   <Image
-                    source={{ uri: 'https://picsum.photos/100/200' }}
+                    source={{ uri: 'https://picsum.photos/300/460' }}
                     style={styles.imageFilm}
                   />
                   <Title text={item.title} size="small" />
