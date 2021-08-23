@@ -38,9 +38,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MyStarWars/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MyStarWars/main.m; sourceTree = "<group>"; };
 		50144A03A9AED8DF63639C85 /* Pods-MyStarWars-MyStarWarsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyStarWars-MyStarWarsTests.debug.xcconfig"; path = "Target Support Files/Pods-MyStarWars-MyStarWarsTests/Pods-MyStarWars-MyStarWarsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7821B2357F60497398F61026 /* StarJedi.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = StarJedi.ttf; path = ../src/assets/fonts/StarJedi.ttf; sourceTree = "<group>"; };
+		7821B2357F60497398F61026 /* StarJedi.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = StarJedi.ttf; path = ../src/assets/fonts/StarJedi.ttf; sourceTree = "<group>"; };
 		7D6A517718F7B1EBEDBDC27B /* Pods-MyStarWars-MyStarWarsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyStarWars-MyStarWarsTests.release.xcconfig"; path = "Target Support Files/Pods-MyStarWars-MyStarWarsTests/Pods-MyStarWars-MyStarWarsTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MyStarWars/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85746B2226D317C30081C258 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		96562446C1A95DA1FCFF740E /* libPods-MyStarWars-MyStarWarsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyStarWars-MyStarWarsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3059F28B0954D96A7BAC55 /* libPods-MyStarWars.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyStarWars.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22CD076541002D271FF8174 /* Pods-MyStarWars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyStarWars.release.xcconfig"; path = "Target Support Files/Pods-MyStarWars/Pods-MyStarWars.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				85746B2126D3176B0081C258 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* MyStarWars */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MyStarWarsTests */,
@@ -140,13 +142,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		85746B2126D3176B0081C258 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				85746B2226D317C30081C258 /* AntDesign.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		8869DF317A8A4B05BF1C85A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				7821B2357F60497398F61026 /* StarJedi.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		C2EC9BABFF4FCC2EA488D2B3 /* Pods */ = {
@@ -157,7 +166,6 @@
 				50144A03A9AED8DF63639C85 /* Pods-MyStarWars-MyStarWarsTests.debug.xcconfig */,
 				7D6A517718F7B1EBEDBDC27B /* Pods-MyStarWars-MyStarWarsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

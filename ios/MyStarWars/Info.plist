@@ -54,6 +54,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>StarJedi.ttf</string>
+    <string>AntDesign.ttf</string>
 	</array>
 </dict>
 </plist>
