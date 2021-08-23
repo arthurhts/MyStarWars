@@ -25,7 +25,14 @@ Rodando em Android
 yarn ios
 ```
 
-## ARQUITETURAS 
+## ARQUITETURAS E TECNOLOGIAS 
+
+### TYPESCRIPT
+- Superset para javascript, auxiliando no desenvolvimento e facilidade de mantermos padrão de código.
+
+### REACT HOOKS
+- https://pt-br.reactjs.org/docs/hooks-intro.html
+
 ### FLUX 
 O Flux traz um conceito de fluxo unidirecional de dados onde a interação do usuário vai provocar um evento no formato de uma action específica. Essa ação vai despachar o evento para a modificação de um dados, que vai modificar o store de dados e, por fim, este vai enviar um evento de atualização da visualização. Ao final a visualização vai consumir os dados das mais variadas formas.
 - Redux
