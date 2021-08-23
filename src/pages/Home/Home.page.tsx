@@ -16,7 +16,10 @@ import { Title } from '../../atomic/atoms/Title/Title.atom';
 import { RootScreenNavigation } from '../../navigation/RootNavigator';
 import { ScreensName } from '../../navigation/ScreenName';
 import { IState } from '../../store';
-import { loadPeopleRequest } from '../../store/modules/peoples/actions';
+import {
+  loadPeopleRequest,
+  resetPeople,
+} from '../../store/modules/peoples/actions';
 import { IPeople } from '../../store/modules/peoples/types';
 import { colors } from '../../style';
 import styles from './Home.styles';
@@ -43,7 +46,7 @@ const Home = () => {
   );
 
   React.useEffect(() => {
-    dispatch(loadPeopleRequest(true));
+    dispatch(loadPeopleRequest());
   }, [dispatch]);
 
   const goToDetailsPeople = React.useCallback(
@@ -54,7 +57,7 @@ const Home = () => {
   );
 
   const loadNextPage = React.useCallback(() => {
-    dispatch(loadPeopleRequest(false));
+    dispatch(loadPeopleRequest());
   }, [dispatch]);
 
   const shouldNextPage = React.useMemo(
@@ -74,6 +77,11 @@ const Home = () => {
     );
   };
 
+  const handleRefresh = React.useCallback(() => {
+    dispatch(resetPeople());
+    dispatch(loadPeopleRequest());
+  }, [dispatch]);
+
   return (
     <Container>
       <SafeAreaView>
@@ -86,6 +94,8 @@ const Home = () => {
             contentContainerStyle={styles.contentFlatList}
             onEndReached={() => shouldNextPage && loadNextPage()}
             onEndReachedThreshold={0.1}
+            refreshing={isLoading}
+            onRefresh={handleRefresh}
             ListFooterComponent={renderFooter}
             renderItem={({ item }: { item: IPeople }) => (
               <Pressable

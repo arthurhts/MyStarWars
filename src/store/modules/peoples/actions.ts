@@ -1,9 +1,8 @@
 import { ActionTypesPeople, IPeopleResponse } from './types';
 
-export function loadPeopleRequest(firstPage: boolean) {
+export function loadPeopleRequest() {
   return {
     type: ActionTypesPeople.LOAD_REQUEST,
-    payload: { firstPage },
   };
 }
 
