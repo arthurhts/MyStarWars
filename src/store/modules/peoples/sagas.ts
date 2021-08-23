@@ -25,7 +25,7 @@ export function* load() {
     }
 
     if (peoples.totalLoaded === 0) {
-      response = yield call(api.get, `/people`);
+      response = yield call(api.get, '/people');
       yield put(loadPeopleSuccess(response.data));
     }
   } catch (error) {
