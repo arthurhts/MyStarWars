@@ -17,8 +17,6 @@ export function* load() {
       return state.peoples;
     });
 
-    console.log(peoples);
-
     let response: AxiosResponse<IPeopleResponse>;
 
     if (peoples.totalLoaded < peoples.total) {
@@ -27,13 +25,10 @@ export function* load() {
     }
 
     if (peoples.totalLoaded === 0) {
-      console.log('CAIU');
       response = yield call(api.get, `/people`);
-      console.log(response.data.results.length);
       yield put(loadPeopleSuccess(response.data));
     }
   } catch (error) {
-    console.log(error);
     yield put(loadPeopleFailure());
   }
 }

@@ -49,7 +49,6 @@ const PeopleDetails = () => {
   useFocusEffect(
     React.useCallback(() => {
       dispatch(resetFilm());
-      console.log(params.people.films);
       dispatch(loadFilmRequest(params.people.films));
     }, [dispatch, params.people]),
   );

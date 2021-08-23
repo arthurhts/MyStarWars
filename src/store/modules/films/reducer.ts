@@ -12,7 +12,6 @@ const films: Reducer<IFilmState> = (state = INITIAL_STATE, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case ActionTypesFilm.LOAD_SUCCESS: {
-        console.log(action);
         draft.loading = false;
         draft.error = false;
         draft.data = action.payload;
